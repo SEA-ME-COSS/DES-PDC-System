@@ -43,7 +43,7 @@ int main()
             // Check if HeadUnitTargetProxy is not available and execute a reboot script
         }
         
-        usleep(1000000); // Sleep for one second (in microseconds)
+        usleep(1000000); // Sleep for one second
     }
 
     return 0;
