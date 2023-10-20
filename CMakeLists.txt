@@ -124,7 +124,7 @@ target_link_libraries(HeadUnit
 PRIVATE Qt5::Core Qt5::Quick Qt5::Gui Qt5::Multimedia CommonAPI CommonAPI-SomeIP vsomeip3)
 
 
-# Add install commands for yocto
+# Add install commands
 install(TARGETS HeadUnit DESTINATION /usr/bin/headunit/execute_files)
 install(TARGETS CANSender DESTINATION /usr/bin/headunit/execute_files)
 install(TARGETS IPCManager DESTINATION /usr/bin/headunit/execute_files)
