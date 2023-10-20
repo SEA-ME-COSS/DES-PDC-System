@@ -125,9 +125,9 @@ PRIVATE Qt5::Core Qt5::Quick Qt5::Gui Qt5::Multimedia CommonAPI CommonAPI-SomeIP
 
 
 # Add install commands for yocto
-install(TARGETS HeadUnit DESTINATION /usr/bin/headunit/execute-files)
-install(TARGETS CANSender DESTINATION /usr/bin/headunit/execute-files)
-install(TARGETS IPCManager DESTINATION /usr/bin/headunit/execute-files)
-install(TARGETS InstrumentCluster DESTINATION /usr/bin/headunit/execute-files)
-install(TARGETS PiracerOperator DESTINATION /usr/bin/headunit/execute-files)
-install(TARGETS PiracerSender DESTINATION /usr/bin/headunit/execute-files)
+install(TARGETS HeadUnit DESTINATION /usr/bin/headunit/execute_files)
+install(TARGETS CANSender DESTINATION /usr/bin/headunit/execute_files)
+install(TARGETS IPCManager DESTINATION /usr/bin/headunit/execute_files)
+install(TARGETS InstrumentCluster DESTINATION /usr/bin/headunit/execute_files)
+install(TARGETS PiracerOperator DESTINATION /usr/bin/headunit/execute_files)
+install(TARGETS PiracerSender DESTINATION /usr/bin/headunit/execute_files)
