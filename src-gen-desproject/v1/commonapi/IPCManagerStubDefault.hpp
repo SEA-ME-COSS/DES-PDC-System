@@ -84,17 +84,41 @@ public:
         std::string message = "";
         _reply(message);
     }
-    COMMONAPI_EXPORT virtual void setLight(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _light, setLightReply_t _reply) {
+    COMMONAPI_EXPORT virtual void setLight(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _Light, setLightReply_t _reply) {
         (void)_client;
-        (void)_light;
+        (void)_Light;
         std::string message = "";
         _reply(message);
     }
-    COMMONAPI_EXPORT virtual void setSteering(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _Steering, setSteeringReply_t _reply) {
+    COMMONAPI_EXPORT virtual void setThrottle(const std::shared_ptr<CommonAPI::ClientId> _client, double _Throttle, setThrottleReply_t _reply) {
+        (void)_client;
+        (void)_Throttle;
+        std::string message = "";
+        _reply(message);
+    }
+    COMMONAPI_EXPORT virtual void setSteering(const std::shared_ptr<CommonAPI::ClientId> _client, double _Steering, setSteeringReply_t _reply) {
         (void)_client;
         (void)_Steering;
         std::string message = "";
         _reply(message);
+    }
+    COMMONAPI_EXPORT virtual void getGearMode(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _message1, getGearModeReply_t _reply) {
+        (void)_client;
+        (void)_message1;
+        std::string message2 = "";
+        _reply(message2);
+    }
+    COMMONAPI_EXPORT virtual void getDirection(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _message1, getDirectionReply_t _reply) {
+        (void)_client;
+        (void)_message1;
+        std::string message2 = "";
+        _reply(message2);
+    }
+    COMMONAPI_EXPORT virtual void getLight(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _message1, getLightReply_t _reply) {
+        (void)_client;
+        (void)_message1;
+        std::string message2 = "";
+        _reply(message2);
     }
 
 

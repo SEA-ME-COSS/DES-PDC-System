@@ -5,7 +5,6 @@ HeadUnitQtClass::HeadUnitQtClass(QObject *parent) : QObject(parent)
 {
     // Initialize sensorRpm and steering to 0
     QsensorRpm = 0;
-    Qsteering = 0;
 }
 
 // Getter for sensorRpm
@@ -14,10 +13,22 @@ quint16 HeadUnitQtClass::sensorRpm() const
     return QsensorRpm;
 }
 
-// Getter for steering
-quint16 HeadUnitQtClass::steering() const
+// Getter for gear
+quint16 HeadUnitQtClass::gear() const
 {
-    return Qsteering;
+    return Qgear;
+}
+
+// Getter for direction
+quint16 HeadUnitQtClass::direction() const
+{
+    return Qdirection;
+}
+
+// Getter for light
+QString HeadUnitQtClass::light() const
+{
+    return Qlight;
 }
 
 // Setter for sensorRpm
@@ -28,28 +39,44 @@ void HeadUnitQtClass::setSensorRpm(uint16_t _sensorRpm)
     emit sensorRpmChanged();
 }
 
-// Setter for steering
-void HeadUnitQtClass::setSteering(uint16_t _steering)
+// Setter for gear
+void HeadUnitQtClass::setGear(uint16_t _gear)
 {
-    Qsteering = _steering;
+    Qgear = _gear;
     // Emit the signal to notify changes to QML
-    emit steeringChanged();
+    emit gearChanged();
+}
+
+// Setter for direction
+void HeadUnitQtClass::setDirection(uint16_t _direction)
+{
+    Qdirection = _direction;
+    // Emit the signal to notify changes to QML
+    emit directionChanged();
+}
+
+// Setter for light
+void HeadUnitQtClass::setLight(QString _light)
+{
+    Qlight = _light;
+    // Emit the signal to notify changes to QML
+    emit lightChanged();
 }
 
 // QML-invokable method to set the gear using IPCManagerTargetProxy
-Q_INVOKABLE void HeadUnitQtClass::setGear(quint16 _gear)
+Q_INVOKABLE void HeadUnitQtClass::setIPCManagerGear(quint16 _gear)
 {
     sender.IPCManagerTargetProxy->setGearMode(_gear, sender.callStatus, sender.returnMessage);
 }
 
 // QML-invokable method to set the direction using IPCManagerTargetProxy
-Q_INVOKABLE void HeadUnitQtClass::setDirection(quint16 _direction)
+Q_INVOKABLE void HeadUnitQtClass::setIPCManagerDirection(quint16 _direction)
 {
     sender.IPCManagerTargetProxy->setDirection(_direction, sender.callStatus, sender.returnMessage);
 }
 
 // QML-invokable method to set the light using IPCManagerTargetProxy
-Q_INVOKABLE void HeadUnitQtClass::setLight(QString _light)
+Q_INVOKABLE void HeadUnitQtClass::setIPCManagerLight(QString _light)
 {
     sender.IPCManagerTargetProxy->setLight(_light.toStdString(), sender.callStatus, sender.returnMessage);
 }

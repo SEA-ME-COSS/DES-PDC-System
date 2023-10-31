@@ -7,11 +7,11 @@
  * If a copy of the MPL was not distributed with this file, You can obtain one at
  * http://mozilla.org/MPL/2.0/.
  */
-#include <v1/commonapi/PiracerOperatorSomeIPDeployment.hpp>
+#include <v1/commonapi/PiracerControllerSomeIPDeployment.hpp>
 
 namespace v1 {
 namespace commonapi {
-namespace PiracerOperator_ {
+namespace PiracerController_ {
 
 // Type-specific deployments
 
@@ -21,6 +21,6 @@ namespace PiracerOperator_ {
 
 // Broadcast-specific deployments
 
-} // namespace PiracerOperator_
+} // namespace PiracerController_
 } // namespace commonapi
 } // namespace v1

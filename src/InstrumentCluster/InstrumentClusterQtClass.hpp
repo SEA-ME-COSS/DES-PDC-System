@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QString>
 
+#include "InstrumentClusterSenderClass.hpp"
+
 class InstrumentClusterQtClass : public QObject
 {
     Q_OBJECT  // Macro that indicates this class uses Qt's object system.
@@ -18,6 +20,8 @@ class InstrumentClusterQtClass : public QObject
     Q_PROPERTY(QString light READ light WRITE setLight NOTIFY lightChanged)
 
 private:
+    InstrumentClusterSenderClass sender;  // Create an instance of InstrumentClusterSenderClass for communication
+
     quint16 Qspeed;      // Speed property.
     quint16 Qrpm;        // RPM (Revolutions Per Minute) property.
     quint16 Qbattery;    // Battery level property.
@@ -43,6 +47,9 @@ public:
     void setGear(uint16_t _gear);
     void setDirection(uint16_t _direction);
     void setLight(QString _light);
+    
+public Q_SLOTS:
+    Q_INVOKABLE void getIPCManagerDirection();  // QML-invokable method to get direction
 
 signals:
     // Signals to notify property changes.

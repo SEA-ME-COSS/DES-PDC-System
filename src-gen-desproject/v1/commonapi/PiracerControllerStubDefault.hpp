@@ -7,13 +7,13 @@
 * If a copy of the MPL was not distributed with this file, You can obtain one at
 * http://mozilla.org/MPL/2.0/.
 */
-#ifndef V1_COMMONAPI_Piracer_Operator_STUB_DEFAULT_HPP_
-#define V1_COMMONAPI_Piracer_Operator_STUB_DEFAULT_HPP_
+#ifndef V1_COMMONAPI_Piracer_Controller_STUB_DEFAULT_HPP_
+#define V1_COMMONAPI_Piracer_Controller_STUB_DEFAULT_HPP_
 
 
 #include <CommonAPI/Export.hpp>
 
-#include <v1/commonapi/PiracerOperatorStub.hpp>
+#include <v1/commonapi/PiracerControllerStub.hpp>
 #include <cassert>
 #include <sstream>
 
@@ -33,8 +33,8 @@ namespace v1 {
 namespace commonapi {
 
 /**
- * Provides a default implementation for PiracerOperatorStubRemoteEvent and
- * PiracerOperatorStub. Method callbacks have an empty implementation,
+ * Provides a default implementation for PiracerControllerStubRemoteEvent and
+ * PiracerControllerStub. Method callbacks have an empty implementation,
  * remote set calls on attributes will always change the value of the attribute
  * to the one received.
  *
@@ -42,12 +42,12 @@ namespace commonapi {
  * that would be defined for this service, and/or if you do not need any non-default
  * behaviour.
  */
-class COMMONAPI_EXPORT_CLASS_EXPLICIT PiracerOperatorStubDefault
-    : public virtual PiracerOperatorStub {
+class COMMONAPI_EXPORT_CLASS_EXPLICIT PiracerControllerStubDefault
+    : public virtual PiracerControllerStub {
 public:
-    COMMONAPI_EXPORT PiracerOperatorStubDefault()
+    COMMONAPI_EXPORT PiracerControllerStubDefault()
         : remoteEventHandler_(this),
-          interfaceVersion_(PiracerOperator::getInterfaceVersion()) {
+          interfaceVersion_(PiracerController::getInterfaceVersion()) {
     }
 
     COMMONAPI_EXPORT const CommonAPI::Version& getInterfaceVersion(std::shared_ptr<CommonAPI::ClientId> _client) {
@@ -55,33 +55,27 @@ public:
         return interfaceVersion_;
     }
 
-    COMMONAPI_EXPORT PiracerOperatorStubRemoteEvent* initStubAdapter(const std::shared_ptr< PiracerOperatorStubAdapter> &_adapter) {
-        CommonAPI::Stub<PiracerOperatorStubAdapter, PiracerOperatorStubRemoteEvent>::stubAdapter_ = _adapter;
+    COMMONAPI_EXPORT PiracerControllerStubRemoteEvent* initStubAdapter(const std::shared_ptr< PiracerControllerStubAdapter> &_adapter) {
+        CommonAPI::Stub<PiracerControllerStubAdapter, PiracerControllerStubRemoteEvent>::stubAdapter_ = _adapter;
         return &remoteEventHandler_;
     }
 
-    COMMONAPI_EXPORT virtual void setGearMode(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _GearMode, setGearModeReply_t _reply) {
-        (void)_client;
-        (void)_GearMode;
-        std::string message = "";
-        _reply(message);
-    }
 
 
 protected:
-    class COMMONAPI_EXPORT_CLASS_EXPLICIT RemoteEventHandler: public virtual PiracerOperatorStubRemoteEvent {
+    class COMMONAPI_EXPORT_CLASS_EXPLICIT RemoteEventHandler: public virtual PiracerControllerStubRemoteEvent {
     public:
-        COMMONAPI_EXPORT RemoteEventHandler(PiracerOperatorStubDefault *_defaultStub)
+        COMMONAPI_EXPORT RemoteEventHandler(PiracerControllerStubDefault *_defaultStub)
             : 
               defaultStub_(_defaultStub) {
         }
 
 
     private:
-        PiracerOperatorStubDefault *defaultStub_;
+        PiracerControllerStubDefault *defaultStub_;
     };
 protected:
-    PiracerOperatorStubDefault::RemoteEventHandler remoteEventHandler_;
+    PiracerControllerStubDefault::RemoteEventHandler remoteEventHandler_;
 
 private:
 
@@ -96,4 +90,4 @@ private:
 // Compatibility
 namespace v1_0 = v1;
 
-#endif // V1_COMMONAPI_Piracer_Operator_STUB_DEFAULT
+#endif // V1_COMMONAPI_Piracer_Controller_STUB_DEFAULT

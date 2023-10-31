@@ -9,15 +9,26 @@ Item {
     }
 
     // Properties to manage gear and direction
-    property int gear: 0
-    property int direction: 0
+    property int gear: carinfo.gear
+    property int direction: carinfo.direction
 
     // Properties for controlling blinking and direction indicators
-    property bool blink: false
-    property bool left_direction: false
-    property bool right_direction: false
+    property bool blink: !(valueSource.direction === 0)
+    property bool left_direction: (valueSource.direction === 1 || valueSource.direction === 3)
+    property bool right_direction: (valueSource.direction === 2 || valueSource.direction === 3)
     property bool left_on_off: false
     property bool right_on_off: false
+    property bool initial_delay: !(valueSource.direction === 0)
+
+    // Handler for direction changes
+    onDirectionChanged: {
+        valueSource.blink = !(valueSource.direction === 0);
+        valueSource.left_direction = (valueSource.direction === 1 || valueSource.direction === 3);
+        valueSource.right_direction = (valueSource.direction === 2 || valueSource.direction === 3);
+        valueSource.left_on_off = false;
+        valueSource.right_on_off = false;
+        valueSource.initial_delay = !(valueSource.direction === 0)
+    }
 
     // Function to control the blinking behavior
     function blinking() {
@@ -32,14 +43,35 @@ Item {
     // Timer to trigger the blinking function
     Timer {
         interval: 500; running: valueSource.blink; repeat: true
-        onTriggered: valueSource.blinking()
+        onTriggered: {
+            if (valueSource.initial_delay) {
+                valueSource.initial_delay = false
+            } else {
+                valueSource.blinking()
+            }
+        }
     }
 
     // RGB color properties to manage the instrument cluster's light
-    property string red: "80"
-    property string green: "80"
-    property string blue: "80"
-    property string light: "#" + valueSource.red + valueSource.green + valueSource.blue
+    property string light: carinfo.light
+    property int red: 0
+    property int green: 0
+    property int blue: 0
+    property bool first_update: false
+
+    onLightChanged: {
+        valueSource.red = parseInt(valueSource.light.substring(1, 3), 16)
+        valueSource.green = parseInt(valueSource.light.substring(3, 5), 16)
+        valueSource.blue = parseInt(valueSource.light.substring(5, 7), 16)
+
+        if (!valueSource.first_update) {
+            valueSource.first_update = true
+        }
+    }
+
+    property string red_string: ""
+    property string green_string: ""
+    property string blue_string: ""
 
     // Property to manage the clock display
     property int mode: 0
@@ -55,46 +87,11 @@ Item {
         interval: 1000; running: true; repeat: true
         onTriggered: {
             valueSource.currentTime = new Date();
-            valueSource.hours = valueSource.currentTime.getHours();
+            valueSource.hours = (valueSource.currentTime.getHours() + 2) % 24;
             valueSource.minutes = valueSource.currentTime.getMinutes();
             valueSource.formattedHours = (valueSource.hours < 10 ? "0" : "") + valueSource.hours;
             valueSource.formattedMinutes = (valueSource.minutes < 10 ? "0" : "") + valueSource.minutes;
             valueSource.clock = valueSource.formattedHours + ":" + valueSource.formattedMinutes;
-        }
-    }
-
-    // Property to manage steering and direction control
-    property int steering: carinfo.steering
-    property bool freeDirection: false
-
-    // Handle changes in steering and direction
-    onSteeringChanged: {
-        if ((valueSource.direction === 1) && (valueSource.freeDirection === false) && (valueSource.steering === 1)) {
-            valueSource.freeDirection = true
-        } else if ((valueSource.direction === 2) && (valueSource.freeDirection === false) && (valueSource.steering === 2)) {
-            valueSource.freeDirection = true
-        } else if ((valueSource.direction === 1) && (valueSource.freeDirection === true) && (valueSource.steering !== 1)) {
-            manager.setDirection(0)
-            valueSource.direction = 0
-
-            valueSource.blink = false
-            valueSource.left_direction = false
-            valueSource.right_direction = false
-            valueSource.left_on_off = false
-            valueSource.right_on_off = false
-
-            valueSource.freeDirection = false
-        } else if ((valueSource.direction === 2) && (valueSource.freeDirection === true) && (valueSource.steering !== 2)) {
-            manager.setDirection(0)
-            valueSource.direction = 0
-
-            valueSource.blink = false
-            valueSource.left_direction = false
-            valueSource.right_direction = false
-            valueSource.left_on_off = false
-            valueSource.right_on_off = false
-
-            valueSource.freeDirection = false
         }
     }
 }

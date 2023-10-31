@@ -18,9 +18,15 @@ public:
 
     // Override the setSensorRpm function to handle RPM value updates
     virtual void setSensorRpm(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _sensorRpm, setSensorRpmReply_t _return);
-
-    // Override the setSteering function to handle steering value updates
-    virtual void setSteering(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _steering, setSteeringReply_t _return);
+    
+    // Handle a request to update the gear mode of the Head Unit
+    virtual void setGear(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _gear, setGearReply_t _return);
+    
+    // Handle a request to update the direction indicator of the Head Unit
+    virtual void setDirection(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _direction, setDirectionReply_t _return);
+    
+    // Handle a request to update the light color of the Head Unit
+    virtual void setLight(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _light, setLightReply_t _return);
 };
 
 #endif

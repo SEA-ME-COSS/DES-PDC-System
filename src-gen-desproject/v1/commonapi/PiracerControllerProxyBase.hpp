@@ -7,10 +7,10 @@
 * If a copy of the MPL was not distributed with this file, You can obtain one at
 * http://mozilla.org/MPL/2.0/.
 */
-#ifndef V1_COMMONAPI_Piracer_Operator_PROXY_BASE_HPP_
-#define V1_COMMONAPI_Piracer_Operator_PROXY_BASE_HPP_
+#ifndef V1_COMMONAPI_Piracer_Controller_PROXY_BASE_HPP_
+#define V1_COMMONAPI_Piracer_Controller_PROXY_BASE_HPP_
 
-#include <v1/commonapi/PiracerOperator.hpp>
+#include <v1/commonapi/PiracerController.hpp>
 
 
 
@@ -19,11 +19,8 @@
 #define HAS_DEFINED_COMMONAPI_INTERNAL_COMPILATION_HERE
 #endif
 
-#include <vector>
 
 #include <CommonAPI/Proxy.hpp>
-#include <functional>
-#include <future>
 
 #if defined (HAS_DEFINED_COMMONAPI_INTERNAL_COMPILATION_HERE)
 #undef COMMONAPI_INTERNAL_COMPILATION
@@ -33,14 +30,11 @@
 namespace v1 {
 namespace commonapi {
 
-class PiracerOperatorProxyBase
+class PiracerControllerProxyBase
     : virtual public CommonAPI::Proxy {
 public:
 
-    typedef std::function<void(const CommonAPI::CallStatus&, const std::string&)> SetGearModeAsyncCallback;
 
-    virtual void setGearMode(uint16_t _GearMode, CommonAPI::CallStatus &_internalCallStatus, std::string &_message, const CommonAPI::CallInfo *_info = nullptr) = 0;
-    virtual std::future<CommonAPI::CallStatus> setGearModeAsync(const uint16_t &_GearMode, SetGearModeAsyncCallback _callback = nullptr, const CommonAPI::CallInfo *_info = nullptr) = 0;
 
     virtual std::future<void> getCompletionFuture() = 0;
 };
@@ -52,4 +46,4 @@ public:
 // Compatibility
 namespace v1_0 = v1;
 
-#endif // V1_COMMONAPI_Piracer_Operator_PROXY_BASE_HPP_
+#endif // V1_COMMONAPI_Piracer_Controller_PROXY_BASE_HPP_

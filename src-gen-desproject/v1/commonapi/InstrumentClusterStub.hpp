@@ -110,7 +110,7 @@ public:
     /// This is the method that will be called on remote calls on the method setDirection.
     virtual void setDirection(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _Direction, setDirectionReply_t _reply) = 0;
     /// This is the method that will be called on remote calls on the method setLight.
-    virtual void setLight(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _light, setLightReply_t _reply) = 0;
+    virtual void setLight(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _Light, setLightReply_t _reply) = 0;
 
 
     using CommonAPI::Stub<InstrumentClusterStubAdapter, InstrumentClusterStubRemoteEvent>::initStubAdapter;

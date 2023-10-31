@@ -21,15 +21,36 @@ void HeadUnitStubImpl::setSensorRpm(const std::shared_ptr<CommonAPI::ClientId> _
     return;
 }
 
-// Set steering value
-void HeadUnitStubImpl::setSteering(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _steering, setSteeringReply_t _reply)
+void HeadUnitStubImpl::setGear(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _gear, setGearReply_t _reply)
 {
-    // Update the steering value in the 'carinfo' instance
-    carinfo.setSteering(_steering);
-
-    // Send an empty reply
+    // Update the gear mode property in the carinfo object.
+    carinfo.setGear(_gear);
+    
+    // Respond to the client's request by invoking the reply callback.
     _reply("");
     
+    return;
+}
+
+void HeadUnitStubImpl::setDirection(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _direction, setDirectionReply_t _reply)
+{
+    // Update the direction property in the carinfo object.
+    carinfo.setDirection(_direction);
+
+    // Respond to the client's request by invoking the reply callback.
+    _reply("");
+
+    return;
+}
+
+void HeadUnitStubImpl::setLight(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _light, setLightReply_t _reply)
+{
+    // Update the light color property in the carinfo object.
+    carinfo.setLight(QString::fromStdString(_light));
+
+    // Respond to the client's request by invoking the reply callback.
+    _reply("");
+
     return;
 }
 

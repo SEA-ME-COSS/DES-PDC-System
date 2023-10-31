@@ -66,9 +66,21 @@ public:
         std::string message = "";
         _reply(message);
     }
-    COMMONAPI_EXPORT virtual void setSteering(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _Steering, setSteeringReply_t _reply) {
+    COMMONAPI_EXPORT virtual void setGear(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _Gear, setGearReply_t _reply) {
         (void)_client;
-        (void)_Steering;
+        (void)_Gear;
+        std::string message = "";
+        _reply(message);
+    }
+    COMMONAPI_EXPORT virtual void setDirection(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _Direction, setDirectionReply_t _reply) {
+        (void)_client;
+        (void)_Direction;
+        std::string message = "";
+        _reply(message);
+    }
+    COMMONAPI_EXPORT virtual void setLight(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _Light, setLightReply_t _reply) {
+        (void)_client;
+        (void)_Light;
         std::string message = "";
         _reply(message);
     }

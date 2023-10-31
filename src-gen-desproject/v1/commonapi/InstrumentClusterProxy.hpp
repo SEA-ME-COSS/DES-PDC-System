@@ -161,7 +161,7 @@ public:
      * "SUCCESS" or which type of error has occurred. In case of an error, ONLY the CallStatus
      * will be set.
      */
-    virtual void setLight(std::string _light, CommonAPI::CallStatus &_internalCallStatus, std::string &_message, const CommonAPI::CallInfo *_info = nullptr);
+    virtual void setLight(std::string _Light, CommonAPI::CallStatus &_internalCallStatus, std::string &_message, const CommonAPI::CallInfo *_info = nullptr);
     /**
      * Calls setLight with asynchronous semantics.
      *
@@ -172,7 +172,7 @@ public:
      * The std::future returned by this method will be fulfilled at arrival of the reply.
      * It will provide the same value for CallStatus as will be handed to the callback.
      */
-    virtual std::future<CommonAPI::CallStatus> setLightAsync(const std::string &_light, SetLightAsyncCallback _callback = nullptr, const CommonAPI::CallInfo *_info = nullptr);
+    virtual std::future<CommonAPI::CallStatus> setLightAsync(const std::string &_Light, SetLightAsyncCallback _callback = nullptr, const CommonAPI::CallInfo *_info = nullptr);
 
 
 
@@ -233,13 +233,13 @@ std::future<CommonAPI::CallStatus> InstrumentClusterProxy<_AttributeExtensions..
     return delegate_->setDirectionAsync(_Direction, _callback, _info);
 }
 template <typename ... _AttributeExtensions>
-void InstrumentClusterProxy<_AttributeExtensions...>::setLight(std::string _light, CommonAPI::CallStatus &_internalCallStatus, std::string &_message, const CommonAPI::CallInfo *_info) {
-    delegate_->setLight(_light, _internalCallStatus, _message, _info);
+void InstrumentClusterProxy<_AttributeExtensions...>::setLight(std::string _Light, CommonAPI::CallStatus &_internalCallStatus, std::string &_message, const CommonAPI::CallInfo *_info) {
+    delegate_->setLight(_Light, _internalCallStatus, _message, _info);
 }
 
 template <typename ... _AttributeExtensions>
-std::future<CommonAPI::CallStatus> InstrumentClusterProxy<_AttributeExtensions...>::setLightAsync(const std::string &_light, SetLightAsyncCallback _callback, const CommonAPI::CallInfo *_info) {
-    return delegate_->setLightAsync(_light, _callback, _info);
+std::future<CommonAPI::CallStatus> InstrumentClusterProxy<_AttributeExtensions...>::setLightAsync(const std::string &_Light, SetLightAsyncCallback _callback, const CommonAPI::CallInfo *_info) {
+    return delegate_->setLightAsync(_Light, _callback, _info);
 }
 
 template <typename ... _AttributeExtensions>

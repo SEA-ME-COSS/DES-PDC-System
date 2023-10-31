@@ -7,10 +7,10 @@
  * If a copy of the MPL was not distributed with this file, You can obtain one at
  * http://mozilla.org/MPL/2.0/.
  */
-#ifndef V1_COMMONAPI_PIRACER_OPERATOR_SOMEIP_PROXY_HPP_
-#define V1_COMMONAPI_PIRACER_OPERATOR_SOMEIP_PROXY_HPP_
+#ifndef V1_COMMONAPI_PIRACER_CONTROLLER_SOMEIP_PROXY_HPP_
+#define V1_COMMONAPI_PIRACER_CONTROLLER_SOMEIP_PROXY_HPP_
 
-#include <v1/commonapi/PiracerOperatorProxyBase.hpp>
+#include <v1/commonapi/PiracerControllerProxyBase.hpp>
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
 #define COMMONAPI_INTERNAL_COMPILATION
@@ -43,19 +43,15 @@
 namespace v1 {
 namespace commonapi {
 
-class PiracerOperatorSomeIPProxy
-    : virtual public PiracerOperatorProxyBase,
+class PiracerControllerSomeIPProxy
+    : virtual public PiracerControllerProxyBase,
       virtual public CommonAPI::SomeIP::Proxy {
 public:
-    PiracerOperatorSomeIPProxy(
+    PiracerControllerSomeIPProxy(
         const CommonAPI::SomeIP::Address &_address,
         const std::shared_ptr<CommonAPI::SomeIP::ProxyConnection> &_connection);
 
-    virtual ~PiracerOperatorSomeIPProxy();
-
-    virtual void setGearMode(uint16_t _GearMode, CommonAPI::CallStatus &_internalCallStatus, std::string &_message, const CommonAPI::CallInfo *_info);
-
-    virtual std::future<CommonAPI::CallStatus> setGearModeAsync(const uint16_t &_GearMode, SetGearModeAsyncCallback _callback, const CommonAPI::CallInfo *_info);
+    virtual ~PiracerControllerSomeIPProxy();
 
     virtual void getOwnVersion(uint16_t &_major, uint16_t &_minor) const;
 
@@ -69,4 +65,4 @@ private:
 } // namespace commonapi
 } // namespace v1
 
-#endif // V1_COMMONAPI_Piracer_Operator_SOMEIP_PROXY_HPP_
+#endif // V1_COMMONAPI_Piracer_Controller_SOMEIP_PROXY_HPP_

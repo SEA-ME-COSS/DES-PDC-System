@@ -7,8 +7,8 @@
 * If a copy of the MPL was not distributed with this file, You can obtain one at
 * http://mozilla.org/MPL/2.0/.
 */
-#ifndef V1_COMMONAPI_PIRACER_OPERATOR_HPP_
-#define V1_COMMONAPI_PIRACER_OPERATOR_HPP_
+#ifndef V1_COMMONAPI_PIRACER_CONTROLLER_HPP_
+#define V1_COMMONAPI_PIRACER_CONTROLLER_HPP_
 
 
 
@@ -28,19 +28,19 @@
 namespace v1 {
 namespace commonapi {
 
-class PiracerOperator {
+class PiracerController {
 public:
-    virtual ~PiracerOperator() { }
+    virtual ~PiracerController() { }
 
     static inline const char* getInterface();
     static inline CommonAPI::Version getInterfaceVersion();
 };
 
-const char* PiracerOperator::getInterface() {
-    return ("commonapi.PiracerOperator:v1_0");
+const char* PiracerController::getInterface() {
+    return ("commonapi.PiracerController:v1_0");
 }
 
-CommonAPI::Version PiracerOperator::getInterfaceVersion() {
+CommonAPI::Version PiracerController::getInterfaceVersion() {
     return CommonAPI::Version(1, 0);
 }
 
@@ -55,4 +55,4 @@ namespace CommonAPI {
 // Compatibility
 namespace v1_0 = v1;
 
-#endif // V1_COMMONAPI_PIRACER_OPERATOR_HPP_
+#endif // V1_COMMONAPI_PIRACER_CONTROLLER_HPP_

@@ -1,6 +1,7 @@
 #include "InstrumentClusterStubImpl.hpp"
 
 InstrumentClusterStubImpl::InstrumentClusterStubImpl() { }
+
 InstrumentClusterStubImpl::~InstrumentClusterStubImpl() { }
 
 void InstrumentClusterStubImpl::setSpeedRpm(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _sensorRpm, setSpeedRpmReply_t _reply)

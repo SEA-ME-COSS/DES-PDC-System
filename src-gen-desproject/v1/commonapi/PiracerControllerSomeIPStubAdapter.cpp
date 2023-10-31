@@ -7,8 +7,8 @@
  * If a copy of the MPL was not distributed with this file, You can obtain one at
  * http://mozilla.org/MPL/2.0/.
  */
-#include <v1/commonapi/PiracerOperatorSomeIPStubAdapter.hpp>
-#include <v1/commonapi/PiracerOperator.hpp>
+#include <v1/commonapi/PiracerControllerSomeIPStubAdapter.hpp>
+#include <v1/commonapi/PiracerController.hpp>
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
 #define COMMONAPI_INTERNAL_COMPILATION
@@ -25,24 +25,24 @@
 namespace v1 {
 namespace commonapi {
 
-std::shared_ptr<CommonAPI::SomeIP::StubAdapter> createPiracerOperatorSomeIPStubAdapter(
+std::shared_ptr<CommonAPI::SomeIP::StubAdapter> createPiracerControllerSomeIPStubAdapter(
                    const CommonAPI::SomeIP::Address &_address,
                    const std::shared_ptr<CommonAPI::SomeIP::ProxyConnection> &_connection,
                    const std::shared_ptr<CommonAPI::StubBase> &_stub) {
-    return std::make_shared< PiracerOperatorSomeIPStubAdapter<::v1::commonapi::PiracerOperatorStub>>(_address, _connection, _stub);
+    return std::make_shared< PiracerControllerSomeIPStubAdapter<::v1::commonapi::PiracerControllerStub>>(_address, _connection, _stub);
 }
 
-void initializePiracerOperatorSomeIPStubAdapter() {
+void initializePiracerControllerSomeIPStubAdapter() {
     CommonAPI::SomeIP::AddressTranslator::get()->insert(
-        "local:commonapi.PiracerOperator:v1_0:PiracerOperator",
+        "local:commonapi.PiracerController:v1_0:PiracerController",
          0x3ea, 0x2712, 1, 0);
     CommonAPI::SomeIP::Factory::get()->registerStubAdapterCreateMethod(
-        "commonapi.PiracerOperator:v1_0",
-        &createPiracerOperatorSomeIPStubAdapter);
+        "commonapi.PiracerController:v1_0",
+        &createPiracerControllerSomeIPStubAdapter);
 }
 
-INITIALIZER(registerPiracerOperatorSomeIPStubAdapter) {
-    CommonAPI::SomeIP::Factory::get()->registerInterface(initializePiracerOperatorSomeIPStubAdapter);
+INITIALIZER(registerPiracerControllerSomeIPStubAdapter) {
+    CommonAPI::SomeIP::Factory::get()->registerInterface(initializePiracerControllerSomeIPStubAdapter);
 }
 
 } // namespace commonapi

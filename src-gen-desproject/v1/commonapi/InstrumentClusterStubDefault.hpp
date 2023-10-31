@@ -84,9 +84,9 @@ public:
         std::string message = "";
         _reply(message);
     }
-    COMMONAPI_EXPORT virtual void setLight(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _light, setLightReply_t _reply) {
+    COMMONAPI_EXPORT virtual void setLight(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _Light, setLightReply_t _reply) {
         (void)_client;
-        (void)_light;
+        (void)_Light;
         std::string message = "";
         _reply(message);
     }

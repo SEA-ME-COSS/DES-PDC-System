@@ -7,8 +7,8 @@
 * If a copy of the MPL was not distributed with this file, You can obtain one at
 * http://mozilla.org/MPL/2.0/.
 */
-#ifndef V1_COMMONAPI_Piracer_Operator_STUB_HPP_
-#define V1_COMMONAPI_Piracer_Operator_STUB_HPP_
+#ifndef V1_COMMONAPI_Piracer_Controller_STUB_HPP_
+#define V1_COMMONAPI_Piracer_Controller_STUB_HPP_
 
 #include <functional>
 #include <sstream>
@@ -16,14 +16,13 @@
 
 
 
-#include <v1/commonapi/PiracerOperator.hpp>
+#include <v1/commonapi/PiracerController.hpp>
 
 #if !defined (COMMONAPI_INTERNAL_COMPILATION)
 #define COMMONAPI_INTERNAL_COMPILATION
 #define HAS_DEFINED_COMMONAPI_INTERNAL_COMPILATION_HERE
 #endif
 
-#include <vector>
 
 
 #include <CommonAPI/Stub.hpp>
@@ -38,13 +37,13 @@ namespace commonapi {
 
 /**
  * Receives messages from remote and handles all dispatching of deserialized calls
- * to a stub for the service PiracerOperator. Also provides means to send broadcasts
+ * to a stub for the service PiracerController. Also provides means to send broadcasts
  * and attribute-changed-notifications of observable attributes as defined by this service.
  * An application developer should not need to bother with this class.
  */
-class PiracerOperatorStubAdapter
+class PiracerControllerStubAdapter
     : public virtual CommonAPI::StubAdapter,
-      public virtual PiracerOperator {
+      public virtual PiracerController {
  public:
 
 
@@ -61,7 +60,7 @@ protected:
 
 /**
  * Defines the necessary callbacks to handle remote set events related to the attributes
- * defined in the IDL description for PiracerOperator.
+ * defined in the IDL description for PiracerController.
  * For each attribute two callbacks are defined:
  * - a verification callback that allows to verify the requested value and to prevent setting
  *   e.g. an invalid value ("onRemoteSet<AttributeName>").
@@ -71,41 +70,39 @@ protected:
  * This class and the one below are the ones an application developer needs to have
  * a look at if he wants to implement a service.
  */
-class PiracerOperatorStubRemoteEvent
+class PiracerControllerStubRemoteEvent
 {
 public:
-    virtual ~PiracerOperatorStubRemoteEvent() { }
+    virtual ~PiracerControllerStubRemoteEvent() { }
 
 };
 
 /**
  * Defines the interface that must be implemented by any class that should provide
- * the service PiracerOperator to remote clients.
+ * the service PiracerController to remote clients.
  * This class and the one above are the ones an application developer needs to have
  * a look at if he wants to implement a service.
  */
-class PiracerOperatorStub
-    : public virtual CommonAPI::Stub<PiracerOperatorStubAdapter, PiracerOperatorStubRemoteEvent>
+class PiracerControllerStub
+    : public virtual CommonAPI::Stub<PiracerControllerStubAdapter, PiracerControllerStubRemoteEvent>
 {
 public:
-    typedef std::function<void (std::string _message)> setGearModeReply_t;
 
-    virtual ~PiracerOperatorStub() {}
+    virtual ~PiracerControllerStub() {}
     void lockInterfaceVersionAttribute(bool _lockAccess) { static_cast<void>(_lockAccess); }
     bool hasElement(const uint32_t _id) const {
-        return (_id < 1);
+        (void)_id; // (_id=0)
+        return false;
     }
     virtual const CommonAPI::Version& getInterfaceVersion(std::shared_ptr<CommonAPI::ClientId> _client) = 0;
 
-    /// This is the method that will be called on remote calls on the method setGearMode.
-    virtual void setGearMode(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _GearMode, setGearModeReply_t _reply) = 0;
 
 
-    using CommonAPI::Stub<PiracerOperatorStubAdapter, PiracerOperatorStubRemoteEvent>::initStubAdapter;
-    typedef CommonAPI::Stub<PiracerOperatorStubAdapter, PiracerOperatorStubRemoteEvent>::StubAdapterType StubAdapterType;
-    typedef CommonAPI::Stub<PiracerOperatorStubAdapter, PiracerOperatorStubRemoteEvent>::RemoteEventHandlerType RemoteEventHandlerType;
-    typedef PiracerOperatorStubRemoteEvent RemoteEventType;
-    typedef PiracerOperator StubInterface;
+    using CommonAPI::Stub<PiracerControllerStubAdapter, PiracerControllerStubRemoteEvent>::initStubAdapter;
+    typedef CommonAPI::Stub<PiracerControllerStubAdapter, PiracerControllerStubRemoteEvent>::StubAdapterType StubAdapterType;
+    typedef CommonAPI::Stub<PiracerControllerStubAdapter, PiracerControllerStubRemoteEvent>::RemoteEventHandlerType RemoteEventHandlerType;
+    typedef PiracerControllerStubRemoteEvent RemoteEventType;
+    typedef PiracerController StubInterface;
 };
 
 } // namespace commonapi
@@ -115,4 +112,4 @@ public:
 // Compatibility
 namespace v1_0 = v1;
 
-#endif // V1_COMMONAPI_Piracer_Operator_STUB_HPP_
+#endif // V1_COMMONAPI_Piracer_Controller_STUB_HPP_
