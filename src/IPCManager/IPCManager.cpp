@@ -20,31 +20,7 @@ int main()
     IPCManagerSenderClass sender; // Create an instance of IPCManagerSenderClass
     int exitCode;
 
-    while (1)
-    {
-        if (!sender.CANSenderTargetProxy->isAvailable()) {
-            exitCode = system("sh ../reboot_script/reboot_can_sender.sh");
-            // Check if CANSenderTargetProxy is not available and execute a reboot script
-        }
-        if (!sender.PiracerSenderTargetProxy->isAvailable()) {
-            exitCode = system("sh ../reboot_script/reboot_piracer_sender.sh");
-            // Check if PiracerSenderTargetProxy is not available and execute a reboot script
-        }
-        if (!sender.PiracerControllerTargetProxy->isAvailable()) {
-            exitCode = system("sh ../reboot_script/reboot_piracer_controller.sh");
-            // Check if PiracerControllerTargetProxy is not available and execute a reboot script
-        }
-        if (!sender.InstrumentClusterTargetProxy->isAvailable()) {
-            exitCode = system("sh ../reboot_script/reboot_instrument_cluster.sh");
-            // Check if InstrumentClusterTargetProxy is not available and execute a reboot script
-        }
-        if (!sender.HeadUnitTargetProxy->isAvailable()) {
-            exitCode = system("sh ../reboot_script/reboot_head_unit.sh");
-            // Check if HeadUnitTargetProxy is not available and execute a reboot script
-        }
-
-        usleep(1000000); // Sleep for one second
-    }
+    while (1) { }
 
     return 0;
 }
