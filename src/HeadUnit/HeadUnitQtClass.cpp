@@ -5,7 +5,6 @@ HeadUnitQtClass::HeadUnitQtClass(QObject *parent) : QObject(parent)
 {
     // Initialize sensorRpm and steering to 0
     QsensorRpm = 0;
-    Qlight = QString::fromStdString("#808080");
 }
 
 // Getter for sensorRpm
