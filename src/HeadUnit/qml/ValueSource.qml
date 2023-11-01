@@ -53,7 +53,7 @@ Item {
     }
 
     // RGB color properties to manage the instrument cluster's light
-    property string light: carinfo.light
+    property string light: (carinfo.light[0] === '#' ? carinfo.light : "#808080")
     property int red: 0
     property int green: 0
     property int blue: 0
