@@ -14,7 +14,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_PREFIX_PATH "/opt/Qt/5.15.0/gcc_64")
+# set(CMAKE_PREFIX_PATH "/opt/Qt/5.15.0/gcc_64")
 
 # Append C++ compiler flags, including -pthread and -std=c++0x
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -std=c++0x")
@@ -32,14 +32,11 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 # Configure include and link directories
 include_directories(
     src-gen-desproject
-    ~/build-commonapi/capicxx-core-runtime/include
-    ~/build-commonapi/capicxx-someip-runtime/include
-    ~/build-commonapi/vsomeip/interface
+    ${CMAKE_INCLUDE_PATH}/CommonAPI-3.2
+    ${CMAKE_INCLUDE_PATH}
 )
 link_directories(
-    ~/build-commonapi/capicxx-core-runtime/build
-    ~/build-commonapi/capicxx-someip-runtime/build
-    ~/build-commonapi/vsomeip/build
+    ${CMAKE_LIBRARY_PATH}
 )
 
 
@@ -178,3 +175,15 @@ add_executable(RemoteSpeaker
         src-gen-desproject/v1/commonapi/RemoteSpeakerSomeIPDeployment.cpp
 )
 target_link_libraries(RemoteSpeaker CommonAPI CommonAPI-SomeIP vsomeip3)
+
+# Add install commands
+install(TARGETS CANSender DESTINATION /usr/bin/pdc)
+install(TARGETS InstrumentCluster DESTINATION /usr/bin/pdc)
+install(TARGETS IVICompositor DESTINATION /usr/bin/pdc)
+install(TARGETS PiracerController DESTINATION /usr/bin/pdc)
+install(TARGETS RemoteSpeaker DESTINATION /usr/bin/pdc)
+install(TARGETS HeadUnit DESTINATION /usr/bin/pdc)
+install(TARGETS IPCManager DESTINATION /usr/bin/pdc)
+install(TARGETS PDCUnit DESTINATION /usr/bin/pdc)
+install(TARGETS PiracerSender DESTINATION /usr/bin/pdc)
+
