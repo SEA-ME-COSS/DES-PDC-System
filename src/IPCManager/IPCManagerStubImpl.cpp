@@ -45,6 +45,8 @@ void IPCManagerStubImpl::setGearMode(const std::shared_ptr<CommonAPI::ClientId> 
         // Relay gear mode to the InstrumentCluster service
         sender.InstrumentClusterTargetProxy->setGear(_gearMode, sender.callStatus, sender.returnMessage);
         sender.HeadUnitTargetProxy->setGear(_gearMode, sender.callStatus, sender.returnMessage);
+        sender.IVICompositorTargetProxy->setGear(_gearMode, sender.callStatus, sender.returnMessage);
+        sender.RemoteSpeakerTargetProxy->setGear(_gearMode, sender.callStatus, sender.returnMessage);
     }
 
     // Reply to the caller
@@ -66,7 +68,7 @@ void IPCManagerStubImpl::setDirection(const std::shared_ptr<CommonAPI::ClientId>
         sender.InstrumentClusterTargetProxy->setDirection(0, sender.callStatus, sender.returnMessage);
         sender.HeadUnitTargetProxy->setDirection(0, sender.callStatus, sender.returnMessage);
     }
-    else
+    else if (piracer.getDirection() != 3)
     {
         // Set direction to piracer
         piracer.setDirection(_direction);
@@ -116,6 +118,9 @@ void IPCManagerStubImpl::setSteering(const std::shared_ptr<CommonAPI::ClientId> 
 {
     // Apply steering to piracer
     piracer.applySteering(_steering);
+    piracer.setSteering(_steering);
+    
+    // ==================================================
     
     if ((piracer.getDirection() == 1) && (piracer.getFreeDirection() == false) && (_steering == -1.0))
     {
@@ -148,6 +153,18 @@ void IPCManagerStubImpl::setSteering(const std::shared_ptr<CommonAPI::ClientId> 
     return;
 }
 
+// Set distance
+void IPCManagerStubImpl::setDistance(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _distance, setDistanceReply_t _reply)
+{
+    sender.PDCUnitTargetProxy->setDistance(_distance, sender.callStatus, sender.returnMessage);
+    sender.RemoteSpeakerTargetProxy->setDistance(_distance, sender.callStatus, sender.returnMessage);
+    
+    // Reply to the caller
+    _reply("");
+
+    return;
+}
+
 // Get gear mode
 void IPCManagerStubImpl::getGearMode(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _input, getGearModeReply_t _reply)
 {   
@@ -158,6 +175,10 @@ void IPCManagerStubImpl::getGearMode(const std::shared_ptr<CommonAPI::ClientId> 
     else if (_input == "HeadUnit")
     {
         sender.HeadUnitTargetProxy->setGear(piracer.getGearMode(), sender.callStatus, sender.returnMessage);
+    }
+    else if (_input == "IVICompositor")
+    {
+        sender.IVICompositorTargetProxy->setGear(piracer.getGearMode(), sender.callStatus, sender.returnMessage);
     }
 
     // Reply to the caller
@@ -201,3 +222,18 @@ void IPCManagerStubImpl::getLight(const std::shared_ptr<CommonAPI::ClientId> _cl
 
     return;
 }
+
+// Get steering
+void IPCManagerStubImpl::getSteering(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _input, getSteeringReply_t _reply)
+{    
+    if (_input == "PDCUnit")
+    {
+        sender.PDCUnitTargetProxy->setSteering(piracer.getSteering(), sender.callStatus, sender.returnMessage);
+    }
+    
+    // Reply to the caller
+    _reply("");
+
+    return;
+}
+

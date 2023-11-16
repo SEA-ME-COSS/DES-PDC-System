@@ -41,6 +41,9 @@ public:
     // Define a function to set steering and relay it to other services, then reply to the caller.
     virtual void setSteering(const std::shared_ptr<CommonAPI::ClientId> _client, double _steering, setSteeringReply_t _return);
     
+    // Define a function to set distance and relay it to other services, then reply to the caller.
+    virtual void setDistance(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _distance, setDistanceReply_t _return);
+    
     // Define a function to get gear mode.
     virtual void getGearMode(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _input, getGearModeReply_t _return);
     
@@ -49,6 +52,9 @@ public:
     
     // Define a function to get light.
     virtual void getLight(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _input, getLightReply_t _return);
+    
+    // Define a function to get steering.
+    virtual void getSteering(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _input, getSteeringReply_t _return);
 };
 
 #endif

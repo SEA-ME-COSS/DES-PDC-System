@@ -34,7 +34,7 @@ Item {
             target: valueSource
             property: "speed"
             easing.type: Easing.InOutSine
-            duration: 1000
+            duration: 500
         }
     }
     Behavior on rpm {
@@ -42,7 +42,7 @@ Item {
             target: valueSource
             property: "rpm"
             easing.type: Easing.InOutSine
-            duration: 1000
+            duration: 500
         }
     }
     Behavior on battery {
@@ -50,7 +50,7 @@ Item {
             target: valueSource
             property: "battery"
             easing.type: Easing.InOutSine
-            duration: 1000
+            duration: 500
         }
     }
 

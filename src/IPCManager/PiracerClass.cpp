@@ -12,6 +12,7 @@ PiracerClass::PiracerClass()
     direction = 0; // Initialize the direction to 0 (default)
     light = "#808080"; // Initialize the light to #808080 (default)
     freeDirection = false; // Initialize the direction-freeing condition to false (default)
+    steering = 0.0;
 }
 
 PiracerClass::~PiracerClass()
@@ -57,6 +58,13 @@ void PiracerClass::setFreeDirection(bool _freeDirection)
     return;
 }
 
+void PiracerClass::setSteering(double _steering)
+{
+    steering = _steering;
+    
+    return;
+}
+
 uint16_t PiracerClass::getGearMode()
 {
     return gearMode;
@@ -82,6 +90,11 @@ uint16_t PiracerClass::getSensorRpm()
     return sensorRpm;
 }
 
+double PiracerClass::getSteering()
+{
+    return steering;
+}
+
 void PiracerClass::applyThrottle(double throttle)
 {
     switch (gearMode)
@@ -93,7 +106,7 @@ void PiracerClass::applyThrottle(double throttle)
         case 1: // R (Reverse)
 	    if (throttle <= 0)
 	    {
-	        PyObject_CallMethod(pInstance, "set_throttle_percent", "(f)", throttle * 0.3); // Call the Python method "set_throttle_percent" with the throttle value
+	        PyObject_CallMethod(pInstance, "set_throttle_percent", "(f)", throttle * 0.4); // Call the Python method "set_throttle_percent" with the throttle value
 	    }
 	    else
 	    {

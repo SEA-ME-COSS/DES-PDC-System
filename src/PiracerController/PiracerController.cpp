@@ -56,6 +56,14 @@ int main()
 	{
 	    IPCManagertargetProxy->setGearMode(3, callStatus, returnMessage);
         }
+        if ((!controller.getPreButtonLeftTurn()) && (controller.getButtonLeftTurn()))
+	{
+	    IPCManagertargetProxy->setDirection(1, callStatus, returnMessage);
+        }
+        if ((!controller.getPreButtonRightTurn()) && (controller.getButtonRightTurn()))
+	{
+	    IPCManagertargetProxy->setDirection(2, callStatus, returnMessage);
+        }
     }
 
     return 0;

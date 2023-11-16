@@ -3,7 +3,7 @@
 // Constructor for HeadUnitQtClass
 HeadUnitQtClass::HeadUnitQtClass(QObject *parent) : QObject(parent)
 {
-    // Initialize sensorRpm and steering to 0
+    // Initialize sensorRpm to 0
     QsensorRpm = 0;
 }
 

@@ -47,9 +47,6 @@ public:
     void setGear(uint16_t _gear);
     void setDirection(uint16_t _direction);
     void setLight(QString _light);
-    
-public Q_SLOTS:
-    Q_INVOKABLE void getIPCManagerDirection();  // QML-invokable method to get direction
 
 signals:
     // Signals to notify property changes.

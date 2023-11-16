@@ -74,7 +74,7 @@ void HeadUnitSomeIPProxy::setSensorRpm(uint16_t _SensorRpm, CommonAPI::CallStatu
         >
     >::callMethodWithReply(
         *this,
-        CommonAPI::SomeIP::method_id_t(0x73),
+        CommonAPI::SomeIP::method_id_t(0x75),
         false,
         false,
         (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),
@@ -102,7 +102,7 @@ std::future<CommonAPI::CallStatus> HeadUnitSomeIPProxy::setSensorRpmAsync(const 
         >
     >::callMethodAsync(
         *this,
-        CommonAPI::SomeIP::method_id_t(0x73),
+        CommonAPI::SomeIP::method_id_t(0x75),
         false,
         false,
         (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),
@@ -132,7 +132,7 @@ void HeadUnitSomeIPProxy::setGear(uint16_t _Gear, CommonAPI::CallStatus &_intern
         >
     >::callMethodWithReply(
         *this,
-        CommonAPI::SomeIP::method_id_t(0x74),
+        CommonAPI::SomeIP::method_id_t(0x76),
         false,
         false,
         (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),
@@ -160,7 +160,7 @@ std::future<CommonAPI::CallStatus> HeadUnitSomeIPProxy::setGearAsync(const uint1
         >
     >::callMethodAsync(
         *this,
-        CommonAPI::SomeIP::method_id_t(0x74),
+        CommonAPI::SomeIP::method_id_t(0x76),
         false,
         false,
         (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),
@@ -190,7 +190,7 @@ void HeadUnitSomeIPProxy::setDirection(uint16_t _Direction, CommonAPI::CallStatu
         >
     >::callMethodWithReply(
         *this,
-        CommonAPI::SomeIP::method_id_t(0x75),
+        CommonAPI::SomeIP::method_id_t(0x77),
         false,
         false,
         (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),
@@ -218,7 +218,7 @@ std::future<CommonAPI::CallStatus> HeadUnitSomeIPProxy::setDirectionAsync(const 
         >
     >::callMethodAsync(
         *this,
-        CommonAPI::SomeIP::method_id_t(0x75),
+        CommonAPI::SomeIP::method_id_t(0x77),
         false,
         false,
         (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),
@@ -248,7 +248,7 @@ void HeadUnitSomeIPProxy::setLight(std::string _Light, CommonAPI::CallStatus &_i
         >
     >::callMethodWithReply(
         *this,
-        CommonAPI::SomeIP::method_id_t(0x76),
+        CommonAPI::SomeIP::method_id_t(0x78),
         false,
         false,
         (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),
@@ -276,7 +276,7 @@ std::future<CommonAPI::CallStatus> HeadUnitSomeIPProxy::setLightAsync(const std:
         >
     >::callMethodAsync(
         *this,
-        CommonAPI::SomeIP::method_id_t(0x76),
+        CommonAPI::SomeIP::method_id_t(0x78),
         false,
         false,
         (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),

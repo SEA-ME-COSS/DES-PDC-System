@@ -3,6 +3,7 @@ import QtQuick.Window 2.1
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
+import QtQuick.Layouts 1.15
 import QtMultimedia 5.15
 import DataModule 1.0
 
@@ -31,8 +32,6 @@ Window {
         width: 1024
         height: 600
         anchors.centerIn: parent
-        rotation: 0
-        scale: 0.5
 
         Rectangle {
             id: background
@@ -240,12 +239,13 @@ Window {
             }
 
             // Mouse area for handling left turn indicator interaction
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    manager.setIPCManagerDirection(1)
-                }
-            }
+            // # Uncomment the following code if you want to control turn indicator by touching the head unit display
+            // MouseArea {
+            //     anchors.fill: parent
+            //     onClicked: {
+            //         manager.setIPCManagerDirection(1)
+            //     }
+            // }
         }
 
         // Right turn indicator
@@ -269,17 +269,19 @@ Window {
             }
 
             // Mouse area for handling right turn indicator interaction
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    manager.setIPCManagerDirection(2)
-                }
-            }
+            // # Uncomment the following code if you want to control turn indicator by touching the head unit display
+            // MouseArea {
+            //     anchors.fill: parent
+            //     onClicked: {
+            //         manager.setIPCManagerDirection(2)
+            //     }
+            // }
         }
 
         // Warning icon with multiple layers
         Image {
             source: "../image/warning-icon.png"
+            opacity: (valueSource.direction === 3) ? 1.0 : 0.3
             width: 120
             height: 120
             fillMode: Image.PreserveAspectFit
@@ -398,7 +400,7 @@ Window {
 
             // Update red value and set light color
             onValueChanged: {
-                if (valueSource.first_update) {
+                if (valueSource.initial_update) {
                     valueSource.red_string = redSlider.value.toString(16)
                     if (valueSource.red_string.length === 1) {
                         valueSource.red_string = "0" + valueSource.red_string
@@ -448,7 +450,7 @@ Window {
 
             // Update green value and set light color
             onValueChanged: {
-                if (valueSource.first_update) {
+                if (valueSource.initial_update) {
                     valueSource.red_string = redSlider.value.toString(16)
                     if (valueSource.red_string.length === 1) {
                         valueSource.red_string = "0" + valueSource.red_string
@@ -498,7 +500,7 @@ Window {
 
             // Update blue value and set light color
             onValueChanged: {
-                if (valueSource.first_update) {
+                if (valueSource.initial_update) {
                     valueSource.red_string = redSlider.value.toString(16)
                     if (valueSource.red_string.length === 1) {
                         valueSource.red_string = "0" + valueSource.red_string
@@ -803,7 +805,15 @@ Window {
 
             onSensorRpmChanged: {
                 if ((valueSource.mode === 3) && (sensorRpm !== 0)) {
-                        mp4Player.pause()
+                    mp4Player.pause()
+                }
+            }
+
+            property int gear: carinfo.gear
+
+            onGearChanged: {
+                if ((valueSource.mode === 3) && (gear === 1)) {
+                    mp4Player.pause()
                 }
             }
         }

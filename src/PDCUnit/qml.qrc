@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>font/Nebula-Regular.otf</file>
+        <file>image/pdc_red_indicator.png</file>
+        <file>image/pdc_yellow_indicator.png</file>
+        <file>image/pdc_green_indicator.png</file>
+    </qresource>
+</RCC>

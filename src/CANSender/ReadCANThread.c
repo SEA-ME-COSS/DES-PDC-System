@@ -1,13 +1,15 @@
 #include "ReadCANThread.h"
+#include <stdio.h>
 
 int soc;                     // Socket descriptor for CAN communication
-uint16_t speed_sensor_rpm;   // Variable to store speed sensor RPM data
+uint16_t speed_sensor_rpm;
+uint16_t distance;
 
 // Function to open and configure the CAN port
 int open_port(const char *port) {
     struct ifreq ifr;
     struct sockaddr_can addr;
-    struct can_filter rfilter[1];
+    struct can_filter rfilter[2];
 
     // Create a raw CAN socket
     soc = socket(PF_CAN, SOCK_RAW, CAN_RAW);
@@ -38,6 +40,8 @@ int open_port(const char *port) {
     // Set a CAN filter to receive specific messages
     rfilter[0].can_id   = 0x0F6;
     rfilter[0].can_mask = CAN_SFF_MASK;
+    rfilter[1].can_id   = 0x0F7;
+    rfilter[1].can_mask = CAN_SFF_MASK;
     if (setsockopt(soc, SOL_CAN_RAW, CAN_RAW_FILTER, &rfilter, sizeof(rfilter)) < 0) {
         printf("Error setting CAN filter!");
         return (-1);
@@ -47,7 +51,7 @@ int open_port(const char *port) {
 }
 
 // Function to read data from the CAN port
-void read_port(uint16_t *speed_sensor_rpm) {
+void read_port() {
     struct can_frame frame;
     int recvbytes = 0;
     struct timeval timeout = {1, 0};
@@ -61,7 +65,20 @@ void read_port(uint16_t *speed_sensor_rpm) {
     
             if (recvbytes) {
                 if (frame.can_id == 0x0F6) {
-                    *speed_sensor_rpm = (frame.data[0] << 8) + frame.data[1];
+                    speed_sensor_rpm = (frame.data[0] << 8) + frame.data[1];
+                    
+        	    pthread_mutex_lock(&SpeedBufferMutex);
+        	    SpeedBuffer[SpeedBufferIndex] = speed_sensor_rpm;
+        	    SpeedBufferIndex = (SpeedBufferIndex + 1) % SpeedBuffer_SIZE;
+        	    pthread_mutex_unlock(&SpeedBufferMutex);
+                }
+                else if (frame.can_id == 0x0F7) {
+                    distance = (frame.data[0] << 8) + frame.data[1];
+                    
+        	    pthread_mutex_lock(&DistanceBufferMutex);
+        	    DistanceBuffer[DistanceBufferIndex] = distance;
+        	    DistanceBufferIndex = (DistanceBufferIndex + 1) % DistanceBuffer_SIZE;
+        	    pthread_mutex_unlock(&DistanceBufferMutex);
                 }
             }
         }
@@ -80,12 +97,7 @@ void *ReadCANThread(void *arg) {
     open_port("can0");
 
     while (1) {
-        read_port(&speed_sensor_rpm);
-        
-        pthread_mutex_lock(&CANBufferMutex);
-        CANBuffer[CANBufferIndex] = speed_sensor_rpm;
-        CANBufferIndex = (CANBufferIndex + 1) % CANBuffer_SIZE;
-        pthread_mutex_unlock(&CANBufferMutex);
+        read_port();
     }
 
     close_port();

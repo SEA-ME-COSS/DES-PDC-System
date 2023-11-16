@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
     // Initialize the QML Application Engine
     QQmlApplicationEngine engine;
 
-    // Set the "carinfo" context property in QML to the carinfo object
     engine.rootContext()->setContextProperty("carinfo", &carinfo);
 
     // Load the main QML file from resources

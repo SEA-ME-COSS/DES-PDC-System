@@ -8,7 +8,8 @@
 #include <v1/commonapi/IPCManagerProxy.hpp>
 
 #include "CANSenderStubImpl.hpp"
-#include "CANBuffer.h"
+#include "SpeedBuffer.h"
+#include "DistanceBuffer.h"
 
 #define SIZE 2
 #define MEASURE_SIZE 1

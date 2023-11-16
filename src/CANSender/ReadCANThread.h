@@ -17,12 +17,13 @@ extern "C" {
 #include <linux/can.h>
 #include <linux/can/raw.h>
 
-#include "CANBuffer.h"
+#include "SpeedBuffer.h"
+#include "DistanceBuffer.h"
 
 int open_port(const char *port);       // Function to open and configure the CAN port
-void read_port(uint16_t *speed_sensor_rpm);  // Function to read data from the CAN port
+void read_port();  // Function to read data from the CAN port
 int close_port();                      // Function to close the CAN port
-void *ReadCANThread(void *arg);         // Thread function to read CAN data continuously
+void *ReadCANThread(void *arg);         // Thread function to read speed data continuously
 
 #ifdef __cplusplus
 }

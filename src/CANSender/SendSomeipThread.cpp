@@ -24,17 +24,19 @@ void *SendSomeipThread(void *arg)
     double speed_sensor_renewed_e[SIZE], speed_sensor_renewed_P[SIZE][SIZE];
     double speed_sensor_measuredstate;
     
+    int currentIndex;
+    
     while (1)
     {
-        // Read speed data from CAN buffer
-        pthread_mutex_lock(&CANBufferMutex);
-        int currentIndex = CANBufferIndex - 1;
+        // Read speed data from speed buffer
+        pthread_mutex_lock(&SpeedBufferMutex);
+        currentIndex = SpeedBufferIndex - 1;
         if (currentIndex < 0)
         {
-            currentIndex = CANBuffer_SIZE - 1;
+            currentIndex = SpeedBuffer_SIZE - 1;
         }
-        uint16_t speed_sensor_rpm = CANBuffer[currentIndex];
-        pthread_mutex_unlock(&CANBufferMutex);
+        uint16_t speed_sensor_rpm = SpeedBuffer[currentIndex];
+        pthread_mutex_unlock(&SpeedBufferMutex);
         
         speed_sensor_measuredstate = (double)speed_sensor_rpm;
         
@@ -54,7 +56,24 @@ void *SendSomeipThread(void *arg)
         // Round the filtered speed value and send it to IPCManager
         uint16_t kf_speed_sensor_rpm = (uint16_t)round(speed_sensor_renewed_e[0]);
         IPCManagertargetProxy->setSensorRpm(kf_speed_sensor_rpm, callStatus, returnMessage);
-        usleep(500000);  // Sleep for 500 ms
+        
+        // (UP) Sending speed data
+        // ==================================================
+        // (DOWN) Sending distance data
+        
+        // Read distance data from distance buffer
+        pthread_mutex_lock(&DistanceBufferMutex);
+        currentIndex = DistanceBufferIndex - 1;
+        if (currentIndex < 0)
+        {
+            currentIndex = DistanceBuffer_SIZE - 1;
+        }
+        uint16_t distance = DistanceBuffer[currentIndex];
+        pthread_mutex_unlock(&DistanceBufferMutex);
+
+        IPCManagertargetProxy->setDistance(distance, callStatus, returnMessage);
+        
+        usleep(300000);  // Sleep for 300 ms
     }
     
     return NULL;

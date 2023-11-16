@@ -57,15 +57,15 @@ Item {
     property int red: 0
     property int green: 0
     property int blue: 0
-    property bool first_update: false
+    property bool initial_update: false
 
     onLightChanged: {
         valueSource.red = parseInt(valueSource.light.substring(1, 3), 16)
         valueSource.green = parseInt(valueSource.light.substring(3, 5), 16)
         valueSource.blue = parseInt(valueSource.light.substring(5, 7), 16)
 
-        if (!valueSource.first_update) {
-            valueSource.first_update = true
+        if (!valueSource.initial_update) {
+            valueSource.initial_update = true
         }
     }
 
@@ -73,8 +73,9 @@ Item {
     property string green_string: ""
     property string blue_string: ""
 
-    // Property to manage the clock display
     property int mode: 0
+
+    // Property to manage the clock display
     property var currentTime: 0
     property int hours: 0
     property int minutes: 0
@@ -87,7 +88,7 @@ Item {
         interval: 1000; running: true; repeat: true
         onTriggered: {
             valueSource.currentTime = new Date();
-            valueSource.hours = (valueSource.currentTime.getHours() + 2) % 24;
+            valueSource.hours = valueSource.currentTime.getHours();
             valueSource.minutes = valueSource.currentTime.getMinutes();
             valueSource.formattedHours = (valueSource.hours < 10 ? "0" : "") + valueSource.hours;
             valueSource.formattedMinutes = (valueSource.minutes < 10 ? "0" : "") + valueSource.minutes;

@@ -22,6 +22,15 @@ IPCManagerSenderClass::IPCManagerSenderClass()
 
     HeadUnitTargetProxy = runtime->buildProxy<HeadUnitProxy>("local", "HeadUnit");
     // Create a proxy for the HeadUnit service
+    
+    PDCUnitTargetProxy = runtime->buildProxy<PDCUnitProxy>("local", "PDCUnit");
+    // Create a proxy for the PDCUnit service
+    
+    IVICompositorTargetProxy = runtime->buildProxy<IVICompositorProxy>("local", "IVICompositor");
+    // Create a proxy for the IVICompositor service
+    
+    RemoteSpeakerTargetProxy = runtime->buildProxy<RemoteSpeakerProxy>("local", "RemoteSpeaker");
+    // Create a proxy for the RemoteSpeaker service
 }
  
 IPCManagerSenderClass::~IPCManagerSenderClass()

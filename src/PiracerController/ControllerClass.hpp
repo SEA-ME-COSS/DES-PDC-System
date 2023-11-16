@@ -24,6 +24,12 @@ private:
     bool pre_button_n;
     bool pre_button_d;
     
+    bool button_left_turn;
+    bool button_right_turn;
+    
+    bool pre_button_left_turn;
+    bool pre_button_right_turn;
+    
 public:
     // Constructor for the ControllerClass
     ControllerClass();
@@ -55,6 +61,12 @@ public:
     bool getPreButtonR();
     bool getPreButtonN();
     bool getPreButtonD();
+    
+    bool getButtonLeftTurn();
+    bool getButtonRightTurn();
+    
+    bool getPreButtonLeftTurn();
+    bool getPreButtonRightTurn();
 };
 
 #endif

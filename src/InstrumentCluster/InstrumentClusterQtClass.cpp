@@ -86,10 +86,5 @@ void InstrumentClusterQtClass::setLight(QString _light)
     emit lightChanged(); // Emit a signal to notify that the light color has changed.
 }
 
-Q_INVOKABLE void InstrumentClusterQtClass::getIPCManagerDirection()
-{
-    sender.IPCManagerTargetProxy->getDirection("InstrumentCluster", sender.callStatus, sender.returnMessage);
-}
-
 InstrumentClusterQtClass carinfo; // Create an instance of the InstrumentClusterQtClass.
 
