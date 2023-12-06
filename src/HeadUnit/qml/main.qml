@@ -199,7 +199,6 @@ Window {
             // }
         }
 
-        // Vertical line to separate
         Rectangle {
             width: 5
             height: parent.height
@@ -208,7 +207,6 @@ Window {
             color: (carinfo.sensorRpm === 0) ? "black" : "#555555"
         }
 
-        // Display the current sensor RPM
         Text {
             text: carinfo.sensorRpm
             font.family: font.name
@@ -306,7 +304,6 @@ Window {
                 }
             }
 
-            // Mouse area for handling warning icon interaction
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
@@ -315,7 +312,6 @@ Window {
             }
         }
 
-        // Vertical line to separate
         Rectangle {
             width: 5
             height: parent.height
@@ -324,7 +320,6 @@ Window {
             color: (carinfo.sensorRpm === 0) ? "black" : "#555555"
         }
 
-        // Logo image
         Image {
             source: "../image/logo.png"
             width: 320
@@ -334,7 +329,6 @@ Window {
             y: 80
         }
 
-        // Seame image
         Image {
             source: "../image/seame.png"
             width: 240
@@ -344,7 +338,6 @@ Window {
             y: 315
         }
 
-        // Wolfsberg image
         Image {
             source: "../image/wolfsberg.png"
             width: 220
@@ -354,7 +347,6 @@ Window {
             y: -40
         }
 
-        // Clock text display
         Item {
             width: 230
             height: 70

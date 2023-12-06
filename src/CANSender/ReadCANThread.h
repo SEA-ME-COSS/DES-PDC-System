@@ -20,10 +20,10 @@ extern "C" {
 #include "SpeedBuffer.h"
 #include "DistanceBuffer.h"
 
-int open_port(const char *port);       // Function to open and configure the CAN port
-void read_port();  // Function to read data from the CAN port
-int close_port();                      // Function to close the CAN port
-void *ReadCANThread(void *arg);         // Thread function to read speed data continuously
+int open_port(const char *port);
+void read_port();
+int close_port();
+void *ReadCANThread(void *arg);
 
 #ifdef __cplusplus
 }

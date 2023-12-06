@@ -53,7 +53,6 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Extras 1.4
 
 CircularGaugeStyle {
-    // Define properties for the custom gauge style
     property real xCenter: outerRadius
     property real yCenter: outerRadius
     property real labelStepSize: 0
@@ -72,7 +71,6 @@ CircularGaugeStyle {
         font.pixelSize: 20
         text: styleData.value
 
-        // Change label color to red for indexes 8 and 9, otherwise black
         color: styleData.index === 8 || styleData.index === 9 ? "red" : "black"
         antialiasing: true
     }
@@ -85,11 +83,9 @@ CircularGaugeStyle {
         property real yCenter: height / 2
 
         onPaint: {
-            // Get the canvas context for drawing
             var ctx = getContext("2d");
             ctx.reset();
 
-            // Draw the gauge needle
             ctx.beginPath();
             ctx.moveTo(xCenter, height);
             ctx.lineTo(xCenter - needleBaseWidth / 2, height - needleBaseWidth / 2);
@@ -100,7 +96,6 @@ CircularGaugeStyle {
             ctx.fillStyle = "red";
             ctx.fill();
 
-            // Draw the second part of the needle
             ctx.beginPath();
             ctx.moveTo(xCenter, height)
             ctx.lineTo(width, height - needleBaseWidth / 2);
@@ -112,6 +107,5 @@ CircularGaugeStyle {
         }
     }
 
-    // Set the foreground to null (no foreground customization)
     foreground: null
 }

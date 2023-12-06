@@ -12,15 +12,14 @@
 #include <v1/commonapi/IVICompositorProxy.hpp>
 #include <v1/commonapi/RemoteSpeakerProxy.hpp>
 
-using namespace v1_0::commonapi;  // Use the v1_0::commonapi namespace
+using namespace v1_0::commonapi;
 
 class IPCManagerSenderClass
 {
 public:
-    IPCManagerSenderClass();  // Constructor
-    ~IPCManagerSenderClass();  // Destructor
+    IPCManagerSenderClass();
+    ~IPCManagerSenderClass();
 
-    // CommonAPI runtime and service proxies
     std::shared_ptr<CommonAPI::Runtime> runtime;
     std::shared_ptr<CANSenderProxy<>> CANSenderTargetProxy;
     std::shared_ptr<PiracerSenderProxy<>> PiracerSenderTargetProxy;

@@ -59,36 +59,103 @@ Window {
         }
 
         Image {
-            source: "../image/pdc_red_indicator.png"
-            visible: (carinfo.distance < 20)
-            width: 675
-            height: 675
+            source: "../image/pdc_base_line.png"
+            visible: true
+            width: 700
+            height: 700
             fillMode: Image.PreserveAspectFit
-            anchors.centerIn: parent
-
-            rotation: carinfo.steering * 30
+            anchors.horizontalCenter: parent.horizontalCenter
+            opacity: 0.5
         }
 
         Image {
-            source: "../image/pdc_yellow_indicator.png"
-            visible: (carinfo.distance < 40)
-            width: 675
-            height: 675
+            source: "../image/pdc_straight_green.png"
+            visible: ((carinfo.steering === 0) && (carinfo.distance < 50))
+            width: 700
+            height: 700
             fillMode: Image.PreserveAspectFit
-            anchors.centerIn: parent
-            
-            rotation: carinfo.steering * 30
+            anchors.horizontalCenter: parent.horizontalCenter
+            opacity: 0.5
         }
 
         Image {
-            source: "../image/pdc_green_indicator.png"
-            visible: (carinfo.distance < 60)
-            width: 675
-            height: 675
+            source: "../image/pdc_straight_yellow.png"
+            visible: ((carinfo.steering === 0) && (carinfo.distance < 30))
+            width: 700
+            height: 700
             fillMode: Image.PreserveAspectFit
-            anchors.centerIn: parent
-            
-            rotation: carinfo.steering * 30
+            anchors.horizontalCenter: parent.horizontalCenter
+            opacity: 0.5
+        }
+
+        Image {
+            source: "../image/pdc_straight_red.png"
+            visible: ((carinfo.steering === 0) && (carinfo.distance < 15))
+            width: 700
+            height: 700
+            fillMode: Image.PreserveAspectFit
+            anchors.horizontalCenter: parent.horizontalCenter
+            opacity: 0.5
+        }
+
+        Image {
+            source: "../image/pdc_right_green.png"
+            visible: ((carinfo.steering < 0) && (carinfo.distance < 50))
+            width: 700
+            height: 700
+            fillMode: Image.PreserveAspectFit
+            anchors.horizontalCenter: parent.horizontalCenter
+            opacity: 0.5
+        }
+
+        Image {
+            source: "../image/pdc_right_yellow.png"
+            visible: ((carinfo.steering < 0) && (carinfo.distance < 30))
+            width: 700
+            height: 700
+            fillMode: Image.PreserveAspectFit
+            anchors.horizontalCenter: parent.horizontalCenter
+            opacity: 0.5
+        }
+
+        Image {
+            source: "../image/pdc_right_red.png"
+            visible: ((carinfo.steering < 0) && (carinfo.distance < 15))
+            width: 700
+            height: 700
+            fillMode: Image.PreserveAspectFit
+            anchors.horizontalCenter: parent.horizontalCenter
+            opacity: 0.5
+        }
+
+        Image {
+            source: "../image/pdc_left_green.png"
+            visible: ((carinfo.steering > 0) && (carinfo.distance < 50))
+            width: 700
+            height: 700
+            fillMode: Image.PreserveAspectFit
+            anchors.horizontalCenter: parent.horizontalCenter
+            opacity: 0.5
+        }
+
+        Image {
+            source: "../image/pdc_left_yellow.png"
+            visible: ((carinfo.steering > 0) && (carinfo.distance < 30))
+            width: 700
+            height: 700
+            fillMode: Image.PreserveAspectFit
+            anchors.horizontalCenter: parent.horizontalCenter
+            opacity: 0.5
+        }
+
+        Image {
+            source: "../image/pdc_left_red.png"
+            visible: ((carinfo.steering > 0) && (carinfo.distance < 15))
+            width: 700
+            height: 700
+            fillMode: Image.PreserveAspectFit
+            anchors.horizontalCenter: parent.horizontalCenter
+            opacity: 0.5
         }
     }
 

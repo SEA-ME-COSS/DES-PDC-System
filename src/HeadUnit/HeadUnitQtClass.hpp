@@ -17,40 +17,40 @@ class HeadUnitQtClass : public QObject
     Q_PROPERTY(QString light READ light WRITE setLight NOTIFY lightChanged)
 
 private:
-    HeadUnitSenderClass sender;  // Create an instance of HeadUnitSenderClass for communication
+    HeadUnitSenderClass sender;
 
-    quint16 QsensorRpm;  // Store sensor RPM data
-    quint16 Qgear;       // Gear mode property.
-    quint16 Qdirection;  // Direction property.
-    QString Qlight;      // Light color property.
+    quint16 QsensorRpm;
+    quint16 Qgear;
+    quint16 Qdirection;
+    QString Qlight;
 
 public:
     explicit HeadUnitQtClass(QObject *parent = nullptr);
 
-    quint16 sensorRpm() const;  // Getter for sensor RPM
+    quint16 sensorRpm() const;
     quint16 gear() const;
     quint16 direction() const;
     QString light() const;
 
-    void setSensorRpm(uint16_t _sensorRpm);  // Setter for sensor RPM
+    void setSensorRpm(uint16_t _sensorRpm);
     void setGear(uint16_t _gear);
     void setDirection(uint16_t _direction);
     void setLight(QString _light);
 
 public Q_SLOTS:
-    Q_INVOKABLE void setIPCManagerGear(quint16 _gear);          // QML-invokable method to set gear
-    Q_INVOKABLE void setIPCManagerDirection(quint16 _direction);  // QML-invokable method to set direction
-    Q_INVOKABLE void setIPCManagerLight(QString _light);         // QML-invokable method to set light
-    Q_INVOKABLE void poweroff();                       // QML-invokable method to power off the system
+    Q_INVOKABLE void setIPCManagerGear(quint16 _gear);
+    Q_INVOKABLE void setIPCManagerDirection(quint16 _direction);
+    Q_INVOKABLE void setIPCManagerLight(QString _light);
+    Q_INVOKABLE void poweroff();
 
 signals:
-    void sensorRpmChanged();   // Signal for sensor RPM changes
+    void sensorRpmChanged();
     void gearChanged();
     void directionChanged();
     void lightChanged();
 };
 
-extern HeadUnitQtClass carinfo;  // Create a global instance of HeadUnitQtClass named 'carinfo'
+extern HeadUnitQtClass carinfo;
 
 #endif
 

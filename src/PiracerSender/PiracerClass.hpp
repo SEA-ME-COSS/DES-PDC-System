@@ -12,13 +12,9 @@ private:
     uint16_t batteryLevel;
 
 public:
-    // Constructor: Initializes the Python interpreter, imports a module, and creates an instance
     PiracerClass();
-
-    // Destructor: Releases Python objects and finalizes the Python interpreter
     ~PiracerClass();
 
-    // Method to get the battery level by calling a Python method
     uint16_t getBatteryLevel();
 };
 

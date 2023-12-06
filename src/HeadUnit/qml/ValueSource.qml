@@ -8,7 +8,6 @@ Item {
         id: manager
     }
 
-    // Properties to manage gear and direction
     property int gear: carinfo.gear
     property int direction: carinfo.direction
 
@@ -20,7 +19,6 @@ Item {
     property bool right_on_off: false
     property bool initial_delay: !(valueSource.direction === 0)
 
-    // Handler for direction changes
     onDirectionChanged: {
         valueSource.blink = !(valueSource.direction === 0);
         valueSource.left_direction = (valueSource.direction === 1 || valueSource.direction === 3);
@@ -30,7 +28,6 @@ Item {
         valueSource.initial_delay = !(valueSource.direction === 0)
     }
 
-    // Function to control the blinking behavior
     function blinking() {
         if (valueSource.left_direction) {
             valueSource.left_on_off = !valueSource.left_on_off
@@ -40,7 +37,6 @@ Item {
         }
     }
 
-    // Timer to trigger the blinking function
     Timer {
         interval: 500; running: valueSource.blink; repeat: true
         onTriggered: {
@@ -52,7 +48,6 @@ Item {
         }
     }
 
-    // RGB color properties to manage the instrument cluster's light
     property string light: carinfo.light
     property int red: 0
     property int green: 0
@@ -75,7 +70,6 @@ Item {
 
     property int mode: 0
 
-    // Property to manage the clock display
     property var currentTime: 0
     property int hours: 0
     property int minutes: 0
@@ -83,7 +77,6 @@ Item {
     property string formattedMinutes: ""
     property string clock: "00:00"
 
-    // Timer to update the clock every second
     Timer {
         interval: 1000; running: true; repeat: true
         onTriggered: {

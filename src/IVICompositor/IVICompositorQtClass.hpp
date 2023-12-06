@@ -9,7 +9,7 @@ class IVICompositorQtClass : public QObject
     Q_PROPERTY(quint16 gear READ gear WRITE setGear NOTIFY gearChanged)
 
 private:
-    quint16 Qgear;       // Gear mode property.
+    quint16 Qgear;
 
 public:
     explicit IVICompositorQtClass(QObject *parent = nullptr);
@@ -22,7 +22,7 @@ signals:
     void gearChanged();
 };
 
-extern IVICompositorQtClass carinfo;  // Create a global instance of IVICompositorQtClass named 'carinfo'
+extern IVICompositorQtClass carinfo;
 
 #endif
 

@@ -1,7 +1,6 @@
 #ifndef REMOTESPEAKERSTUBIMPL_HPP
 #define REMOTESPEAKERSTUBIMPL_HPP
 
-
 #include <CommonAPI/CommonAPI.hpp>
 #include <v1/commonapi/RemoteSpeakerStubDefault.hpp>
 

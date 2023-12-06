@@ -1,19 +1,10 @@
 #include "ControllerClass.hpp"
-#include <iostream>
 
-// Constructor for the ControllerClass
 ControllerClass::ControllerClass()
 {
-    // Initialize the Python interpreter
     Py_Initialize();
-    
-    // Import the "piracer.gamepads" module
     pModule = PyImport_ImportModule("piracer.gamepads");
-
-    // Get the "ShanWanGamepad" class from the module
     pClass = PyObject_GetAttrString(pModule, "ShanWanGamepad");
-
-    // Create an instance of the "ShanWanGamepad" class
     pInstance = PyObject_CallObject(pClass, NULL);
     
     throttle = 0.0;
@@ -39,22 +30,17 @@ ControllerClass::ControllerClass()
     pre_button_right_turn = false;
 }
 
-// Destructor for the ControllerClass
 ControllerClass::~ControllerClass()
 {
-    // Release Python objects to avoid memory leaks
     Py_DECREF(pThrottle);
     Py_DECREF(pSteering);
     Py_DECREF(pInput);
     Py_DECREF(pInstance);
     Py_DECREF(pClass);
     Py_DECREF(pModule);
-    
-    // Finalize the Python interpreter
     Py_Finalize();
 }
 
-// Read control input from the gamepad
 void ControllerClass::readControl()
 {
     pre_throttle = throttle;
@@ -68,31 +54,30 @@ void ControllerClass::readControl()
     pre_button_left_turn = button_left_turn;
     pre_button_right_turn = button_right_turn;
 
-    // Call the "read_data" method on the gamepad instance
     pInput = PyObject_CallMethod(pInstance, "read_data", NULL);
     
     pThrottle = PyObject_GetAttrString(pInput, "analog_stick_right");
     pThrottle = PyObject_GetAttrString(pThrottle, "y");
-    throttle = PyFloat_AsDouble(pThrottle);
-    if ((-0.5 <= throttle) && (throttle < -0.4))
+    throttle = PyFloat_AsDouble(pThrottle) * -1.0;
+    if ((-1.0 <= throttle) && (throttle < -0.8))
+    {
+        throttle = -1.0;
+    }
+    else if ((-0.8 <= throttle) && (throttle < -0.2))
     {
         throttle = -0.5;
     }
-    else if ((-0.4 <= throttle) && (throttle < -0.1))
-    {
-        throttle = -0.25;
-    }
-    else if ((-0.1 <= throttle) && (throttle <= 0.1))
+    else if ((-0.2 <= throttle) && (throttle <= 0.2))
     {
         throttle = 0.0;
     }
-    else if ((0.1 < throttle) && (throttle <= 0.4))
-    {
-        throttle = 0.25;
-    }
-    else if ((0.4 < throttle) && (throttle <= 0.5))
+    else if ((0.2 < throttle) && (throttle <= 0.8))
     {
         throttle = 0.5;
+    }
+    else if ((0.8 < throttle) && (throttle <= 1.0))
+    {
+        throttle = 1.0;
     }
     
     pSteering = PyObject_GetAttrString(pInput, "analog_stick_left");
@@ -119,36 +104,32 @@ void ControllerClass::readControl()
         steering = 1.0;
     }
     
-    button_p = PyObject_IsTrue(PyObject_GetAttrString(pInput, "button_x"));
+    button_p = PyObject_IsTrue(PyObject_GetAttrString(pInput, "button_a"));
     button_r = PyObject_IsTrue(PyObject_GetAttrString(pInput, "button_y"));
     button_n = PyObject_IsTrue(PyObject_GetAttrString(pInput, "button_b"));
-    button_d = PyObject_IsTrue(PyObject_GetAttrString(pInput, "button_l1"));
+    button_d = PyObject_IsTrue(PyObject_GetAttrString(pInput, "button_x"));
     
-    button_left_turn = PyObject_IsTrue(PyObject_GetAttrString(pInput, "button_l2"));
-    button_right_turn = PyObject_IsTrue(PyObject_GetAttrString(pInput, "button_r2"));
+    button_left_turn = PyObject_IsTrue(PyObject_GetAttrString(pInput, "button_l1"));
+    button_right_turn = PyObject_IsTrue(PyObject_GetAttrString(pInput, "button_r1"));
     
     return;
 }
 
-// Get the current throttle value
 double ControllerClass::getThrottle()
 {
     return throttle;
 }
 
-// Get the current steering value
 double ControllerClass::getSteering()
 {
     return steering;
 }
 
-// Get the previous throttle value
 double ControllerClass::getPreThrottle()
 {
     return pre_throttle;
 }
 
-// Get the previous steering value
 double ControllerClass::getPreSteering()
 {
     return pre_steering;

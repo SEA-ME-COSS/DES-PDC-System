@@ -1,7 +1,8 @@
-#include "ReadCANThread.h"
 #include <stdio.h>
 
-int soc;                     // Socket descriptor for CAN communication
+#include "ReadCANThread.h"
+
+int soc;  // Socket descriptor for CAN communication
 uint16_t speed_sensor_rpm;
 uint16_t distance;
 
