@@ -35,19 +35,20 @@ int main(int argc, char *argv[])
             if (DistanceBuffer < 15)
             {
                 std::cout << '\a' << std::endl;
-                usleep(250000);
             }
             else if (DistanceBuffer < 30)
             {
                 std::cout << '\a' << std::endl;
-                usleep(500000);
+                usleep(250000);
             }
             else if (DistanceBuffer < 50)
             {
                 std::cout << '\a' << std::endl;
-                usleep(750000);
+                usleep(500000);
             }  
         }
+        
+        usleep(250000);
     }
 
     return 0;
