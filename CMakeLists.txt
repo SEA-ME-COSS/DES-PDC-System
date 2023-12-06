@@ -18,14 +18,11 @@ include_directories(
     ${PYTHON_INCLUDE_DIRS}
 )
 include_directories(
-    ~/build-commonapi/capicxx-core-runtime/include
-    ~/build-commonapi/capicxx-someip-runtime/include
-    ~/build-commonapi/vsomeip/interface
+    ${CMAKE_INCLUDE_PATH}/CommonAPI-3.2
+    ${CMAKE_INCLUDE_PATH}
 )
 link_directories(
-    ~/build-commonapi/capicxx-core-runtime/build
-    ~/build-commonapi/capicxx-someip-runtime/build
-    ~/build-commonapi/vsomeip/build
+    ${CMAKE_LIBRARY_PATH}
 )
 include_directories(
     src-gen/CANSender/core/common
